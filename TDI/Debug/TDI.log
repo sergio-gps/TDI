@@ -1,1 +1,13 @@
-﻿
+﻿  Test.cpp
+  TDI.cpp
+  Generando código...
+IMtdi_VS2015_Debug.lib(C_Arguments.obj) : warning LNK4099: no se encontró PDB 'IMtdi.pdb' con 'IMtdi_VS2015_Debug.lib(C_Arguments.obj)' o en 'C:\Users\sergi\Source\Repos\TDI\Debug\IMtdi.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+IMtdi_VS2015_Debug.lib(C_File.obj) : warning LNK4099: no se encontró PDB 'IMtdi.pdb' con 'IMtdi_VS2015_Debug.lib(C_File.obj)' o en 'C:\Users\sergi\Source\Repos\TDI\Debug\IMtdi.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+IMtdi_VS2015_Debug.lib(C_General.obj) : warning LNK4099: no se encontró PDB 'IMtdi.pdb' con 'IMtdi_VS2015_Debug.lib(C_General.obj)' o en 'C:\Users\sergi\Source\Repos\TDI\Debug\IMtdi.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+IMtdi_VS2015_Debug.lib(C_Image.obj) : warning LNK4099: no se encontró PDB 'IMtdi.pdb' con 'IMtdi_VS2015_Debug.lib(C_Image.obj)' o en 'C:\Users\sergi\Source\Repos\TDI\Debug\IMtdi.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+IMtdi_VS2015_Debug.lib(C_Matrix.obj) : warning LNK4099: no se encontró PDB 'IMtdi.pdb' con 'IMtdi_VS2015_Debug.lib(C_Matrix.obj)' o en 'C:\Users\sergi\Source\Repos\TDI\Debug\IMtdi.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+IMtdi_VS2015_Debug.lib(C_Memory.obj) : warning LNK4099: no se encontró PDB 'IMtdi.pdb' con 'IMtdi_VS2015_Debug.lib(C_Memory.obj)' o en 'C:\Users\sergi\Source\Repos\TDI\Debug\IMtdi.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+IMtdi_VS2015_Debug.lib(C_String.obj) : warning LNK4099: no se encontró PDB 'IMtdi.pdb' con 'IMtdi_VS2015_Debug.lib(C_String.obj)' o en 'C:\Users\sergi\Source\Repos\TDI\Debug\IMtdi.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+IMtdi_VS2015_Debug.lib(C_Trace.obj) : warning LNK4099: no se encontró PDB 'IMtdi.pdb' con 'IMtdi_VS2015_Debug.lib(C_Trace.obj)' o en 'C:\Users\sergi\Source\Repos\TDI\Debug\IMtdi.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+  TDI.vcxproj -> C:\Users\sergi\Source\Repos\TDI\Debug\TDI.exe
+  TDI.vcxproj -> C:\Users\sergi\Source\Repos\TDI\Debug\TDI.pdb (Full PDB)
