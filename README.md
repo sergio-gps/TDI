@@ -1,2 +1,2 @@
 # TDI
-Digital Image processing proyect
+Digital Image processing project
