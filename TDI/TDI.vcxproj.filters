@@ -52,6 +52,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="..\Lib\IMtdi_VS2015_Debug.lib" />
+    <Library Include="..\Lib\IMtdi_VS2017_Debug.lib" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,5 @@
+﻿  TDI.cpp
+c:\users\sergi\source\repos\tdi\source\tdi.cpp(4): fatal error C1083: No se puede abrir el archivo incluir: 'C_General.hpp': No such file or directory
+  Test.cpp
+c:\users\sergi\source\repos\tdi\source\test.cpp(6): fatal error C1083: No se puede abrir el archivo incluir: 'C_General.hpp': No such file or directory
+  Generando código...
