@@ -314,8 +314,6 @@ void seguirContornos(int i, int j) {
 		//Si el pixel es debil lo ponemos como fuerte
 		if (valor == 2) {
 			auxiliar(i + x[k], j + y[k]) = 1;
-			//Realizamos una nueva llamada recursiva para ese nuevo pixel fuerte
-			//seguirContornos(i + x[k], j + y[k]);
 		}
 	}
 }
