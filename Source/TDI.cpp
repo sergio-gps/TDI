@@ -29,51 +29,31 @@ int main(int argc, char **argv)
 	C_Image original, gauss, sobel, noMax, imgHis, puntosCandidatos;
 	char str[100];
 	int maxHister =0, minHister =0;
-
-	/*	in1:
-	
-	C_IfError(original.Fail(), "No se pudo leer", goto in1);*/
-
-	//do {
-
-	//original = leerImagen(original);
 	
 	printf("Introduzca nombre de la imagen: ");
 	scanf("%s", str);
-	printf("Introduzca umbral m�ximo para el proceso de histeresis:");
+	printf("Introduzca umbral maximo para el proceso de histeresis:");
 	scanf("%d", &maxHister);
-	printf("Introduzca umbral m�nimo para el proceso de histeresis:");
+	printf("Introduzca umbral minimo para el proceso de histeresis:");
 	scanf("%d", &minHister);
 	original.ReadBMP(str);
-	
-	//} while (original.Fail());
-	/*
-	//Obtenemos la imagen 1
-
-	C_Trace("Introduzca la ruta de la primera imagen o el nombre de la \nimagen si se encuentra en la carpeta del programa");
-	std::getline(std::cin, str);
-	original = new char[original.length() + 1];
-	strcpy(_img1_path, original.c_str());
-	img1.ReadBMP(_img1_path);
-	
-	//*/
 
 	gauss = gaussiano(original); //aqui se hace la convolucion entre las dos matrices
+	gauss.WriteBMP("finalGauss.bmp");
 
 	sobel = gradienteSobel(gauss);
-
-	sobel.WriteBMP("sobelFINAL.bmp");
+	sobel.WriteBMP("finalSobel.bmp");
 
 	noMax = supresionNoMax(sobel);
+	noMax.WriteBMP("finalNoMax.bmp");
 
 	puntosCandidatos = contornosCandidatos(noMax, maxHister, minHister);
-
 	auxiliar = puntosCandidatos;
 
 	imgHis = histeresis(auxiliar);
-
-	imgHis.WriteBMP("imagenCANNY.bmp");
+	imgHis.WriteBMP("finalImagenCannyFinal.bmp");
 	
+	system("pause");
 	return 0;
 }
 
@@ -95,14 +75,11 @@ C_Image gaussiano(C_Image img) {
 	//esto hace una matriz con valores gaussianos
 	//luego hay que hacer la convolucion con la matriz original para obtener la imagen con el filtrado
 
-	//img.palette.Print(3,2);
+	printf("Matriz con valores gaussianos\n");
 	gau.Print(5, 2);
 
-	//cout << "Pulsa intro";
-	//getchar();
-
 	img.Convolution(img, gau);
-	img.WriteBMP("gaussian.bmp");
+	printf("Convolucion acabada\n");
 	return img;
 }
 
@@ -189,6 +166,7 @@ C_Image gradienteMag(C_Image imagenGradienteX, C_Image imagenGradienteY) {
 	if (max>255.0) {
 		imagenGradienteMagnitud.Stretch(0, 255);
 	}
+	printf("Magnitud del gradiente calculada\n");
 	return imagenGradienteMagnitud;
 }
 
@@ -280,37 +258,22 @@ C_Image supresionNoMax(C_Image img) {
 			}
 		}
 	}
-
-	imgNoMax.WriteBMP("Last_No_Max.bmp");
-	cout << "No supresion de maximos";
-	getchar();
+	printf("No supresion de maximos terminada\n");
 	return imgNoMax;
 }
 
 C_Image contornosCandidatos(C_Image imgNoMax, int maxHister, int minHister) {
 	
-	C_Image cFuertes, cDebil, auxiliar; //Imagen con contornos fuertes, debiles, y la auxiliar para las ponderaciones
+	C_Image auxiliar = imgNoMax;
 
-	cFuertes = imgNoMax;
-	cFuertes.SetValue(0);
-	cDebil = cFuertes;
-	auxiliar = cFuertes;
 	//Recorremos la matriz de imgNoMax
 	for (int i = imgNoMax.FirstRow(); i< imgNoMax.LastRow(); i++) {
 		for (int j = imgNoMax.FirstCol(); j<imgNoMax.LastCol(); j++) {
 			int valor = imgNoMax(i, j);
-			//Si el valor es mayor que el umbral maximo se guarda en
-			//la imagen de pixeles fuertes y se a�ade a la matriz de
-			//puntos del borde con un valor a 1
 			if (valor >= maxHister) {
-				cFuertes(i, j) = 255;
 				auxiliar(i, j) = 1;
 			}
-			//Si el valor se encuentra entre el valor minimo y maximo
-			//del umbral se guarda en la imagen de pixeles debiles y
-			//se a�ade a la matriz de puntos del borde con un valor a 2
 			if ((valor<maxHister) && valor >= minHister) {
-				cDebil(i, j) = 255;
 				auxiliar(i, j) = 2;
 			}
 		}
@@ -338,27 +301,21 @@ C_Image histeresis(C_Image auxiliar) {
 	imagenFinal.SetValue(2, 0);
 
 	imagenFinal.SetValue(1, 255);
+	printf("Proceso de histeresis terminado\n");
 	return imagenFinal;
 }
 
 void seguirContornos(int i, int j) {
-	//Declaramos unas variables auxiliares
 	int k, valor =0;
-	//Generamos dos vectores que almacenaran las posiciones de los pixeles vecinos
-	//en coordenadas x e y
 	int x[8] = { 1, 1, 0, -1, -1, -1, 0, 1 }, y[8] = { 0, 1, 1, 1, 0, -1, -1, -1 };
-	//Recorremos dicho vector
+	
 	for (k = 0; k < 8; k++) {
-		//Extreaemos el valor del pixel vecino del mapa de puntos (recordar que este
-		//mapa solo almacena valores de 0=pixel descartado, 1=pixel fuerte,2=pixel debil
 		valor = auxiliar(i + x[k], j + y[k]);
-		//Si el pixel vecino se trata de un pixel debil (estariamos hablando de un pixel
-		//d�bil (vecino) unido a un pixel fuerte (pixel actual))
+		//Si el pixel es debil lo ponemos como fuerte
 		if (valor == 2) {
-			//actualizamos el valor del pixel debil a pixel fuerte
 			auxiliar(i + x[k], j + y[k]) = 1;
 			//Realizamos una nueva llamada recursiva para ese nuevo pixel fuerte
-			seguirContornos(i + x[k], j + y[k]);
+			//seguirContornos(i + x[k], j + y[k]);
 		}
 	}
 }
